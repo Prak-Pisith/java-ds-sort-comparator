@@ -24,6 +24,22 @@ class Song {
         return bpm;
     }
 
+    // hashCode and equals for comparison in Set
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, artist, bpm);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Song song = (Song) obj;
+        return Integer.compare(song.bpm, bpm) == 0 &&
+                Objects.equals(title, song.title) &&
+                Objects.equals(artist, song.artist);
+    }
+
     @java.lang.Override
     public java.lang.String toString() {
         return "Song{" +
@@ -33,17 +49,19 @@ class Song {
                 '}';
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        Song song = (Song) object;
-        return bpm == song.bpm && java.util.Objects.equals(title, song.title) && java.util.Objects.equals(artist, song.artist);
-    }
-
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), title, artist, bpm);
-    }
+//    @java.lang.Override
+//    public boolean equals(Object object) {
+//        if (this == object) return true;
+//        if (object == null || getClass() != object.getClass()) return false;
+//        if (!super.equals(object)) return false;
+//        Song song = (Song) object;
+//        return bpm == song.bpm && java.util.Objects.equals(title, song.title) && java.util.Objects.equals(artist, song.artist);
+//    }
+//
+//    @java.lang.Override
+//    public int hashCode() {
+//        return Objects.hash(super.hashCode(), title, artist, bpm);
+//    }
 }
 
 // Mock Song Class
