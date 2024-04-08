@@ -81,5 +81,17 @@ class Main {
         songList.sort(songArtistComparator);
         System.out.println("Sorted Song List by Artist");
         System.out.println(songList);
+
+        // Using Lambda Functions
+        System.out.println("Comparator using LAMBDA Functions");
+        System.out.println("============== LAMBDA ===============");
+
+        songList.sort((obj1, obj2) -> obj1.getTitle().compareTo(obj2.getTitle()));
+        System.out.println("Sorted Song List by Title");
+        System.out.println(songList);
+
+        songList.sort((obj1, obj2) -> obj1.getArtist().compareTo(obj2.getArtist()));
+        System.out.println("Sorted Song List by Artist");
+        System.out.println(songList);
     }
 }
