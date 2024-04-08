@@ -212,5 +212,14 @@ class Main {
         System.out.println("Sorted Song Set (No Duplication)");
         System.out.println(songTreeSet);
         System.out.println("Total => " + songTreeSet.size());
+
+        // Map (part of Java Collections, but not implement Java Collections)
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Pisith", 18);
+        scores.put("Luffy", 34);
+        scores.put("Zoro", 55);
+        System.out.println(scores);
+        System.out.println("Size of Score map : " + scores.size());
+        System.out.println("Score of Zoro : " + scores.get("Zoro"));
     }
 }
