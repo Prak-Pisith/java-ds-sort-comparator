@@ -32,6 +32,18 @@ class Song {
                 ", bpm=" + bpm +
                 '}';
     }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        Song song = (Song) object;
+        return bpm == song.bpm && java.util.Objects.equals(title, song.title) && java.util.Objects.equals(artist, song.artist);
+    }
+
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), title, artist, bpm);
+    }
 }
 
 // Mock Song Class
@@ -42,7 +54,7 @@ class MockSong {
         songs.add(new Song("cassidy", "grateful dead", 158));
         songs.add(new Song("$10", "hitchhiker", 140));
         songs.add(new Song("havana", "cabello", 105));
-        songs.add(new Song("Cassidy", "grateful dead", 158));
+        songs.add(new Song("cassidy", "grateful dead", 158));
         songs.add(new Song("50 ways", "simon", 102));
         return songs;
     }
@@ -69,18 +81,21 @@ class Main {
         System.out.println("Getting List of Songs");
         List<Song> songList = MockSong.getSongList();
         System.out.println(songList);
+        System.out.println("Total => " + songList.size());
 
         // Sorted By Title
         SongTitleComparator songTitleComparator = new SongTitleComparator();
         songList.sort(songTitleComparator);
         System.out.println("Sorted Song List by Title");
         System.out.println(songList);
+        System.out.println("Total => " + songList.size());
 
         // Sorted By Artist
         SongArtistComparator songArtistComparator = new SongArtistComparator();
         songList.sort(songArtistComparator);
         System.out.println("Sorted Song List by Artist");
         System.out.println(songList);
+        System.out.println("Total => " + songList.size());
 
         // Using Lambda Functions
         System.out.println("Comparator using LAMBDA Functions");
@@ -89,9 +104,30 @@ class Main {
         songList.sort((obj1, obj2) -> obj1.getTitle().compareTo(obj2.getTitle()));
         System.out.println("Sorted Song List by Title");
         System.out.println(songList);
+        System.out.println("Total => " + songList.size());
 
         songList.sort((obj1, obj2) -> obj1.getArtist().compareTo(obj2.getArtist()));
         System.out.println("Sorted Song List by Artist");
         System.out.println(songList);
+        System.out.println("Total => " + songList.size());
+
+        // Set
+        System.out.println("============== SET (NO DUPLICATION) ===============");
+
+        Set<Song> songSet = new HashSet<Song> (songList);
+        System.out.println("Sorted Song Set (No Duplication)");
+        System.out.println(songSet);
+        System.out.println("Total => " + songSet.size());
+
+        System.out.println("");
+        System.out.println("============== HashCode Song ==============");
+        System.out.println("Song List Hash =====>");
+        for (Song song : songList) {
+            System.out.println("Song " + song.getTitle() + " has song code: " + song.hashCode());
+        }
+        System.out.println("Song Set Hash  =====>");
+        for (Song song : songSet) {
+            System.out.println("Song " + song.getTitle() + " has song code: " + song.hashCode());
+        }
     }
 }
